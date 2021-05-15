@@ -2,7 +2,7 @@
 
 ## Motivation
 
-This project check Teams user availability and activity to show which led should light up.
+This project check Teams user availability and activity to show which led to light up.
 
 ## Tech/framework
 

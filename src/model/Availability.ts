@@ -1,11 +1,11 @@
 export enum Availability {
-    Available, 
-    AvailableIdle, 
-    Away, 
-    BeRightBack, 
-    Busy, 
-    BusyIdle, 
-    DoNotDisturb, 
-    Offline, 
-    PresenceUnknown
+    Available = "Available", 
+    AvailableIdle = "AvailableIdle", 
+    Away = "Away", 
+    BeRightBack = "BeRightBack", 
+    Busy = "Busy", 
+    BusyIdle = "BusyIdle", 
+    DoNotDisturb = "DoNotDisturb", 
+    Offline = "Offline", 
+    PresenceUnknown = "PresenceUnknown"
 }
