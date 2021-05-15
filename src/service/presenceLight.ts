@@ -1,0 +1,57 @@
+"use strict";
+
+// import { Gpio } from "onoff"; // Raspberry Pi specific TODO: Make environment specific
+import { getPresence } from "../client/presenceApi"
+import { Activity } from "../model/Activity";
+import { Presence } from "../model/Presence"
+
+// Raspberry Pi specific
+// const GREEN_LED = new Gpio(4, 'out')
+// const RED_LED = new Gpio(5, 'out')
+// const YELLOW_LED = new Gpio(6, 'out')
+// const listLedLights = [RED_LED, GREEN_LED, YELLOW_LED]
+
+export function initializePresenceLight(accessToken: string){
+    return setInterval(
+        async function(){
+            try{
+                const presence = await getPresence(accessToken)
+                controlLedLights(presence);
+            }catch(error){
+                console.log(error)
+                //TODO: Refetch token? If possible
+            }
+        }, 
+        2000
+        ) 
+}
+
+// Raspberry Pi specific
+function controlLedLights({ availability, activity }: Presence){
+    const inACallList = [Activity.InACall, Activity.InAConferenceCall, Activity.InAConferenceCall, Activity.InAMeeting];
+    const isAvailable = activity === Activity.Available //TODO: Fix this shit
+    console.log(`Teams activity`, activity)
+    console.log(`Teams availability`, availability)
+    console.log()
+    if(inACallList.includes(activity)){
+        console.log(`turn on RED LIGHT`)
+        // turnOnOneLed(RED_LED)
+    }else if(isAvailable){
+        console.log(`turn on GREEN LIGHT`)
+        // turnOnOneLed(GREEN_LED)
+    }else{
+        // listLedLights.forEach(led => led.writeSync(1))
+    }
+}
+
+// Raspberry Pi specific
+// function turnOnOneLed(targetLed: Gpio){
+//     // Turn off all led
+//     listLedLights.forEach(led => {
+//         led.writeSync(0);
+//         led.unexport();
+//     });
+
+//     // Turn on target led
+//     targetLed.writeSync(1)
+// }

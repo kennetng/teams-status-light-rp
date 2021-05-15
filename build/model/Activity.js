@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Activity = void 0;
+var Activity;
+(function (Activity) {
+    Activity[Activity["Available"] = 0] = "Available";
+    Activity[Activity["Away"] = 1] = "Away";
+    Activity[Activity["BeRightBack"] = 2] = "BeRightBack";
+    Activity[Activity["Busy"] = 3] = "Busy";
+    Activity[Activity["DoNotDisturb"] = 4] = "DoNotDisturb";
+    Activity[Activity["InACall"] = 5] = "InACall";
+    Activity[Activity["InAConferenceCall"] = 6] = "InAConferenceCall";
+    Activity[Activity["Inactive"] = 7] = "Inactive";
+    Activity[Activity["InAMeeting"] = 8] = "InAMeeting";
+    Activity[Activity["Offline"] = 9] = "Offline";
+    Activity[Activity["OffWork"] = 10] = "OffWork";
+    Activity[Activity["OutOfOffice"] = 11] = "OutOfOffice";
+    Activity[Activity["PresenceUnknown"] = 12] = "PresenceUnknown";
+    Activity[Activity["Presenting"] = 13] = "Presenting";
+    Activity[Activity["UrgentInterruptionsOnly"] = 14] = "UrgentInterruptionsOnly";
+})(Activity = exports.Activity || (exports.Activity = {}));
