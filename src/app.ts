@@ -3,10 +3,10 @@ import msal = require('@azure/msal-node');
 import express from 'express';
 import { initializePresenceLight } from './service/presenceLight';
 
-const { PORT, CLIENT_ID, CLIENT_SECRET } = require('./config/environment');
+const { PORT, REDIRECT_URL, CLIENT_ID, CLIENT_SECRET } = require('./config/environment');
 
 const SERVER_PORT = PORT || 3000;
-const REDIRECT_URI = `http://localhost:${SERVER_PORT}/redirect`;
+const REDIRECT_URI = REDIRECT_URL ||`http://localhost:${SERVER_PORT}/redirect`;
 
 // Global variables
 let accessToken: string | undefined;
