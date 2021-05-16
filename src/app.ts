@@ -59,8 +59,11 @@ app.get("/", (req, res) => {
      pca
       .acquireTokenByCode(tokenRequest)
       .then((response) => {
-        accessToken = response?.accessToken
-        res.sendStatus(200)
+        if(response){
+          accessToken = response.accessToken
+          res.sendStatus(200)
+        }
+        res.sendStatus(408)
       })
       .catch((error) => {
         console.log(error);
