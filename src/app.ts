@@ -1,6 +1,9 @@
 import msal = require('@azure/msal-node');
-
 import express from 'express';
+import fs from 'fs';
+import path = require('path');
+import https from 'https';
+
 import { initializePresenceLight } from './service/presenceLight';
 
 const { PORT, REDIRECT_URL, CLIENT_ID, CLIENT_SECRET } = require('./config/environment');
@@ -31,6 +34,11 @@ const msalConfig = {
 
 // Create msal application object
 const pca = new msal.ConfidentialClientApplication(msalConfig);
+
+const certOptions = {
+  key: fs.readFileSync(path.resolve('./server.key')),
+  cert: fs.readFileSync(path.resolve('./server.crt'))
+}
 
 const app = express();
 
@@ -80,11 +88,11 @@ function startApplication(){
         }
     }, 5000)   
 
-    app.listen(SERVER_PORT, () =>
-      console.log(
-        `Msal Node Auth Code Sample app listening on port ${SERVER_PORT}!`
-      )
-    );  
+    https.createServer(certOptions, app).listen(SERVER_PORT, () =>
+    console.log(
+      `Msal Node Auth Code Sample app listening on port ${SERVER_PORT}!`
+    )
+  );  
 }
 
 startApplication()
