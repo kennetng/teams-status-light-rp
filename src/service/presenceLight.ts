@@ -1,7 +1,7 @@
 "use strict";
 
 import { Gpio } from "onoff"; // Raspberry Pi specific 
-import { getPresence } from "../client/presenceApi"
+import { getPresence } from "../client/presenceClient"
 import { Activity } from "../model/Activity";
 import { Presence } from "../model/Presence"
 
@@ -11,15 +11,14 @@ const RED_LED = new Gpio(5, 'out')
 const YELLOW_LED = new Gpio(6, 'out')
 const listLedLights = [RED_LED, GREEN_LED, YELLOW_LED]
 
-export function initializePresenceLight(accessToken: string){
+export function initializePresenceLight(){
     return setInterval(
         async function(){
             try{
-                const presence = await getPresence(accessToken)
+                const presence = await getPresence()
                 controlLedLights(presence);
             }catch(error){
                 console.log(error)
-                //TODO: Refetch token? If possible
             }
         }, 
         2000
