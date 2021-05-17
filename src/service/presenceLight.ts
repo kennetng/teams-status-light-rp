@@ -51,3 +51,10 @@ function turnOnOneLed(targetLed: Gpio){
     // Turn on target led
     targetLed.writeSync(1)
 }
+
+// Gracefully turn off led
+process.on('SIGINT', _ => {
+    listLedLights.forEach(led => {
+        led.unexport();
+    });
+})
