@@ -6,11 +6,9 @@ This project check Teams user availability and activity to show which led to lig
 
 ## Tech/framework
 
-- Express
 - Typescript
 - onoff (For RP led)
-- Node
-- Msal-node (Microsoft auth)
+- NodeJS
 
 ## Installation
 
@@ -29,3 +27,9 @@ yarn dev
 ```
 yarn build
 ```
+
+## Source:
+
+- https://github.com/fivdi/onoff#blink-an-led-using-the-asynchronous-api-and-completion-callbacks
+- https://www.etechnophiles.com/raspberry-pi-zero-gpio-pinout-specifications-programming-language/
+- https://www.voidcanvas.com/control-led-with-raspberry-pi-nodejs
