@@ -3,6 +3,7 @@
 import { Gpio } from "onoff"; // Raspberry Pi specific 
 import { getPresence } from "../client/presenceClient"
 import { Activity } from "../model/Activity";
+import { Availability } from "../model/Availability";
 import { Presence } from "../model/Presence"
 
 //Raspberry Pi specific
@@ -24,9 +25,9 @@ export function initializePresenceLight(){
 }
 
 // Raspberry Pi specific
-function controlLedLights({ availability, activity }: Presence){
+function controlLedLights({  activity }: Presence){
     const inACallList = [Activity.InACall, Activity.InAConferenceCall, Activity.InAConferenceCall, Activity.InAMeeting];
-    const isAvailable = activity === Activity.Available 
+    const isAvailable = activity === Activity.Available
 
     if(inACallList.includes(activity)){
         console.log(`turn on RED LIGHT`)
@@ -37,6 +38,7 @@ function controlLedLights({ availability, activity }: Presence){
         RED_LED.writeSync(0)
         GREEN_LED.writeSync(1)
     }else{
+        console.log('Error did not find a match')
         RED_LED.writeSync(1)
         GREEN_LED.writeSync(1)
     }
