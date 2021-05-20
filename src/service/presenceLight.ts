@@ -8,8 +8,6 @@ import { Presence } from "../model/Presence"
 //Raspberry Pi specific
 const GREEN_LED = new Gpio(4, 'out')
 const RED_LED = new Gpio(5, 'out')
-const YELLOW_LED = new Gpio(6, 'out')
-const listLedLights = [RED_LED, GREEN_LED, YELLOW_LED]
 
 export function initializePresenceLight(){
     return setInterval(
@@ -21,7 +19,7 @@ export function initializePresenceLight(){
                 console.log(error)
             }
         }, 
-        2000
+        5000
         ) 
 }
 
@@ -32,31 +30,20 @@ function controlLedLights({ availability, activity }: Presence){
 
     if(inACallList.includes(activity)){
         console.log(`turn on RED LIGHT`)
-        // turnOnOneLed(RED_LED)
+        GREEN_LED.writeSync(0) 
         RED_LED.writeSync(1)
     }else if(isAvailable){
         console.log(`turn on GREEN LIGHT`)
+        RED_LED.writeSync(0)
         GREEN_LED.writeSync(1)
-        // turnOnOneLed(GREEN_LED)
     }else{
-        listLedLights.forEach(led => led.writeSync(1))
+        RED_LED.writeSync(1)
+        GREEN_LED.writeSync(1)
     }
-}
-
-// Raspberry Pi specific
-function turnOnOneLed(targetLed: Gpio){
-    // Turn off all led
-    listLedLights.forEach(led => {
-        led.writeSync(0);
-    });
-
-    // Turn on target led
-    targetLed.writeSync(1)
 }
 
 // Gracefully turn off led
 process.on('SIGINT', _ => {
-    listLedLights.forEach(led => {
-        led.unexport();
-    });
+    GREEN_LED.unexport();
+    RED_LED.unexport();
 })
