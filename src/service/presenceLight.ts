@@ -20,8 +20,8 @@ export function initializePresenceLight(){
                 console.log(error)
             }
         }, 
-        5000
-        ) 
+        3000
+    ) 
 }
 
 // Raspberry Pi specific

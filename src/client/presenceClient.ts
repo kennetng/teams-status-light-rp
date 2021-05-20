@@ -5,7 +5,7 @@ import { Presence } from "../model/Presence";
 
 const client = axios.create({
     baseURL: 'https://teams-status-light-server.herokuapp.com',
-    timeout: 2000,
+    timeout: 3500,
   });
 
 
