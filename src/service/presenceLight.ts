@@ -29,12 +29,15 @@ export function initializePresenceLight(){
 function controlLedLights({ availability, activity }: Presence){
     const inACallList = [Activity.InACall, Activity.InAConferenceCall, Activity.InAConferenceCall, Activity.InAMeeting];
     const isAvailable = activity === Activity.Available 
+
     if(inACallList.includes(activity)){
         console.log(`turn on RED LIGHT`)
-        turnOnOneLed(RED_LED)
+        // turnOnOneLed(RED_LED)
+        RED_LED.writeSync(1)
     }else if(isAvailable){
         console.log(`turn on GREEN LIGHT`)
-        turnOnOneLed(GREEN_LED)
+        GREEN_LED.writeSync(1)
+        // turnOnOneLed(GREEN_LED)
     }else{
         listLedLights.forEach(led => led.writeSync(1))
     }
@@ -45,7 +48,6 @@ function turnOnOneLed(targetLed: Gpio){
     // Turn off all led
     listLedLights.forEach(led => {
         led.writeSync(0);
-        led.unexport();
     });
 
     // Turn on target led
